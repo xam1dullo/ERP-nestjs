@@ -1,0 +1,61 @@
+
+services:
+  postgres:
+    image: postgres:13
+    restart: unless-stopped
+    env_file: 
+      -  .env
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+    ports:
+      - '5433:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  redis:
+    image: redis:latest
+    ports:
+      - '6379:6379'
+    networks:
+      - backend
+
+  nest_app:
+    build: .
+    ports:
+      - '4000:4000'
+    restart: unless-stopped
+    env_file: 
+      -  .env
+    stdin_open: true
+    tty: true
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - backend
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - '8080:80'
+    depends_on:
+      - postgres
+    networks:
+      - backend
+    env_file:
+      - .env
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  postgres_data:
+
