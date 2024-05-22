@@ -38,7 +38,7 @@ pnpm run start:dev
 pnpm run start:pro
 ```
 
-,```bas
+```bas
 make dev # pn run dev
 make docker-compoae-up
 
