@@ -1,13 +1,13 @@
-# Kerakli pnpm larni o'rnatish
+# Kerakli pnpm packagelarni o'rnatish
 
 ```bash
 pnpm install
 ```
 
 
-## Loyihani ishlastish
+## Loyihani ishlatish
 
-## Loyiha uchun kerak bo'ladigan kalitlarni qo'shish
+### Loyiha uchun kerak bo'ladigan kalitlarni qo'shish
 
 ```bash
  mv .env.example .env
@@ -25,7 +25,8 @@ vim .env
 
 
 
-## Nest serverni yoqish/ishga tushurish
+## Nestjs serverni yoqish/ishga tushurish
+
 ```bash
 # development
 pnpm run start
@@ -35,4 +36,13 @@ pnpm run start:dev
 
 # production mode
 pnpm run start:pro
+```
+
+,```bas
+make dev # pn run dev
+make docker-compoae-up
+
+
+
+,
 ```
